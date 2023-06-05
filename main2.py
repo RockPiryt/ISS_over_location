@@ -2,11 +2,14 @@ import requests
 import datetime as dt
 import smtplib
 import time
-
+import os
+from dotenv import load_dotenv
 
 ###############################MAIL INFORMATION#############################
-MY_EMAIL= "pythonermail@gmail.com"
-APP_PASSWORD_GMAIL ="guzkxmnkxvcwwzen"
+#Get user info to send email
+load_dotenv("C:/Users/Popuś/Desktop/Python/environment_variables/.env")
+my_email= os.getenv("MY_EMAIL")
+api_key_gmail = os.getenv("APP_PASSWORD_GMAIL")
 
 #######################################MY LOCATION###########################
 #Gdańsk
@@ -79,18 +82,18 @@ while True:
     if is_iss_overhead()is True and is_night() is True:
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
-            connection.login(user=MY_EMAIL, password=APP_PASSWORD_GMAIL)
+            connection.login(user=my_email, password=api_key_gmail)
             connection.sendmail(
-                from_addr=MY_EMAIL, 
-                to_addrs=MY_EMAIL, 
+                from_addr=my_email, 
+                to_addrs=my_email, 
                 msg="Subject: Look up \n\nThe ISS is above your head.")
     else:
         with smtplib.SMTP("smtp.gmail.com") as connection:
             connection.starttls()
-            connection.login(user=MY_EMAIL, password=APP_PASSWORD_GMAIL)
+            connection.login(user=my_email, password=api_key_gmail)
             connection.sendmail(
-                from_addr=MY_EMAIL, 
-                to_addrs=MY_EMAIL, 
+                from_addr=my_email, 
+                to_addrs=my_email, 
                 msg="Subject: No ISS \n\nThe ISS is not above your head.")
 
 
